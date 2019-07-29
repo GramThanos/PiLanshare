@@ -1,0 +1,9 @@
+# Configure a LAN share
+ip_address="192.168.2.1"
+netmask="255.255.255.0"
+dhcp_range_start="192.168.2.100"
+dhcp_range_end="192.168.2.250"
+dhcp_time="12h"
+dhcp_binds="00:11:22:33:44:55,192.168.2.10;aa:bb:cc:dd:ee:ff,192.168.2.11"
+eth="eth0"
+wlan="wlan0"
