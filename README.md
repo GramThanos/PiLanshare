@@ -1,4 +1,5 @@
-![version](https://img.shields.io/badge/LanShare-v0.1--beta-yellow.svg?style=flat-square)
+![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.1--beta-yellow.svg?style=flat-square)
+
 
 # PiLanshare
 Share your Raspberry's WiFi to Ethernet
@@ -147,6 +148,14 @@ Finally, change the permissions of the `actions.sh` script, so that only root ca
 sudo chown root:root /var/www/html/scripts/actions.sh
 sudo chmod 755 /var/www/html/scripts/actions.sh
 ```
+
+
+___
+
+
+### More Images
+
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_tools.png)
 
 
 ___
