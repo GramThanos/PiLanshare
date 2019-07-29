@@ -14,9 +14,9 @@ ___
 
 *This is the first version of this guide thus it may have errors, help us to improve it. Please open an issue for any problem*
 
-To start with you should have a Raspberry Pi running Raspbian (Stretch for now).
+To start with, you should have a Raspberry Pi running Raspbian (Stretch for now).
 
-All the commands bellow should be runned on the Raspberry Pi.
+All the commands bellow should run on the Raspberry Pi.
 
 #### Install dnsmasq
 
