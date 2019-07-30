@@ -4,7 +4,7 @@
 # PiLanshare
 Share your Raspberry's WiFi to Ethernet
 
-![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default.png)
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_dnsmasq.png)
 
 
 ___
@@ -167,7 +167,10 @@ ___
 ### More Images
 
 ![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_login.png)
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_interfaces.png)
 ![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_tools.png)
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_action.png)
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_iwconfig.png)
 
 
 ___
