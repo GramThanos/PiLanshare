@@ -1,5 +1,5 @@
 /*
- * PiLanshare WebUI v0.1-beta
+ * PiLanshare WebUI
  * https://github.com/GramThanos/PiLanshare
  *
  * WebUI CSS
@@ -26,4 +26,24 @@ body {
 	.footer .col {
 		text-align: center!important;
 	}
+}
+
+.login .login-form {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.login .bg-logo {
+	background-repeat: no-repeat;
+	background-position: center 30px;
+	background-image: url('../images/logo-128.png');
+	opacity: 0.2;
+}
+
+.login .btn {
+	float: right;
+}
+
+.login .alert {
+	margin-top: 15px;
 }

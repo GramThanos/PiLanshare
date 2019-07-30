@@ -141,7 +141,7 @@ And adding at the bottom the line (edit it if the actions script is somewhere el
 
 This gives permission the the `www-data` user group (the PHP runs under that group) to run the `actions.sh` script.
 
-You may also need to edit the `$actionScriptPath` of the `<path-to-webui>/index.php` to point to the correct path of the `actions.sh` script.
+You may also need to edit the `define('ACTIONS_SCRIPT_PATH', APP_ROOT_PATH . '/scripts/actions.sh');` of the `<path-to-webui>/includes/config.php` to point to the correct path of the `actions.sh` script.
 
 Finally, change the permissions of the `actions.sh` script, so that only root can edit it.
 ```shell
@@ -149,12 +149,24 @@ sudo chown root:root /var/www/html/scripts/actions.sh
 sudo chmod 755 /var/www/html/scripts/actions.sh
 ```
 
+You can configure the WebUI by editing the `<path-to-webui>/includes/config.php` file.
+The example login credentials are username `admin` and password `admin`.
+
+For now the system only supports credentials on the configuration. Example multiple login users list:
+```php
+define('APP_LOGIN_TYPE_LIST', array(
+	// Username		Password in SHA256
+	'admin'		=>	'8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918' // admin - admin
+	'test'		=>	'9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08' // test - test
+));
+```
 
 ___
 
 
 ### More Images
 
+![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_login.png)
 ![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_tools.png)
 
 

@@ -7,16 +7,18 @@
  */
 
 	// Info
-	$projectName = 'PiLanshare WebUI';
-	$projectDescription = 'Monitor your Pi\'s Lanshare';
-	$projectHomepage = 'https://github.com/GramThanos/PiLanshare';
-	$version = 'v0.1-beta';
-	$actionScriptPath = '/var/www/html/scripts/actions.sh';
+	include(dirname(__FILE__) . '/includes/config.php');
 
-	// For debugging
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+	// If login is enabled
+	if (APP_LOGIN) {
+		// Session
+		include(dirname(__FILE__).'/includes/session.php');
+		// If not logged in
+		if (!session_isLoggedIn()) {
+			header('Location: login.php');
+			exit();
+		}
+	}
 
 	// Actions
 	# No password root script run with visudo, based on
@@ -33,8 +35,7 @@
 	# sudo chmod 755 /var/www/html/scripts/lanshare-actions.sh
 	#
 	function lanshare_action ($command) {
-		global $actionScriptPath;
-		exec('sudo ' . $actionScriptPath . ' ' . $command . ' 2>&1', $text, $return_var);
+		exec('sudo ' . ACTIONS_SCRIPT_PATH . ' ' . $command . ' 2>&1', $text, $return_var);
 		//var_dump($text);
 		if ($return_var) return false;
 		$output = '';
@@ -141,6 +142,13 @@
 		return strnatcmp($a['inet'], $b['inet']);
 	});
 
+	// Iwconfig
+	exec('iwconfig', $iwconfig, $return_var);
+	$iwconfig_txt = '';
+	foreach ($iwconfig as $line) {
+		$iwconfig_txt .= $line . "\n";
+	}
+
 	// Get server uptime
 	$str   = @file_get_contents('/proc/uptime');
 	$num   = floatval($str);
@@ -156,8 +164,8 @@
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title><?=htmlspecialchars($projectName);?></title>
-		<meta name="description" content="<?=htmlspecialchars($projectDescription, ENT_QUOTES);?>">
+		<title><?=htmlspecialchars(APP_NAME);?></title>
+		<meta name="description" content="<?=htmlspecialchars(APP_DESCRIPTION);?>">
 		<meta name="author" content="GramThanos">
 		<link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
 
@@ -173,7 +181,25 @@
 		<!-- Top Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="/"><?=htmlspecialchars($projectName);?> <small><?=htmlspecialchars($version);?></small></a>
+				<a class="navbar-brand" href="/"><img src="images/logo-16.png" style="margin-bottom: 4px;"> <?=htmlspecialchars(APP_NAME);?> <small><?=htmlspecialchars(APP_VERSION);?></small></a>
+
+				<?php if (APP_LOGIN) { ?>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="main-navbar">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link"><?=htmlspecialchars(session_get_userUsername());?></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="login.php?logout">Logout</a>
+						</li>
+					</ul>
+				</div>
+				<?php } ?>
+
 			</div>
 		</nav>
 
@@ -252,10 +278,12 @@
 														<button id="tools-dnsmasq-stop" type="button" class="btn btn-sm btn-outline-danger">Qnsmasq Stop</button>
 													</td>
 												</tr>
+												<?php if (APP_DEBUG) { ?>
 												<tr>
-													<td></td>
+													<td>Actions script test <span class="badge badge-success">Debug</span></td>
 													<td><button id="tools-actions-version" type="button" class="btn btn-sm btn-outline-success">Get actions version</button></td>
 												</tr>
+												<?php } ?>
 											</tbody>
 										</table>
 									</div>
@@ -280,10 +308,15 @@
 									<a class="nav-link active" id="interfaces-tab" data-toggle="tab" href="#interfaces" role="tab" aria-controls="interfaces" aria-selected="true">Interfaces</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" id="ifconfig-tab" data-toggle="tab" href="#ifconfig" role="tab" aria-controls="ifconfig" aria-selected="false">Ifconfig</a>
+									<a class="nav-link" id="ifconfig-tab" data-toggle="tab" href="#ifconfig" role="tab" aria-controls="ifconfig" aria-selected="false">ifconfig</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="iwconfig-tab" data-toggle="tab" href="#iwconfig" role="tab" aria-controls="iwconfig" aria-selected="false">iwconfig</a>
 								</li>
 							</ul>
 							<div class="tab-content" id="networks-tabs-content">
+
+								<!-- Interfaces -->
 								<div class="tab-pane fade show active" id="interfaces" role="tabpanel" aria-labelledby="interfaces-tab">
 									<div class="table-responsive">
 										<table class="table table-bordered">
@@ -319,9 +352,17 @@
 										</table>
 									</div>
 								</div>
+
+								<!-- ifconfig -->
 								<div class="tab-pane fade" id="ifconfig" role="tabpanel" aria-labelledby="ifconfig-tab">
-									<textarea style="width: 100%;height: 300px;"><?=htmlspecialchars($ifconfig_txt);?></textarea>
+									<pre><?=htmlspecialchars($ifconfig_txt);?></pre>
 								</div>
+
+								<!-- iwconfig -->
+								<div class="tab-pane fade" id="iwconfig" role="tabpanel" aria-labelledby="iwconfig-tab">
+									<pre><?=htmlspecialchars($iwconfig_txt);?></pre>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -355,7 +396,7 @@
 			<!-- Footer -->
 			<div class="row footer">
 				<div class="col col-12 col-sm-6 text-left">
-					<a href="<?=$projectHomepage;?>" target="_blank"><?=htmlspecialchars($projectName);?></a> <?=htmlspecialchars($version);?>
+					<a href="<?=APP_WEBSITE;?>" target="_blank"><?=htmlspecialchars(APP_NAME);?></a> <?=htmlspecialchars(APP_VERSION);?>
 				</div>
 				<div class="col col-12 col-sm-6 text-right">
 					Created by <a href="https://github.com/GramThanos" target="_blank">GramThanos</a>
