@@ -6,13 +6,12 @@ Share your Raspberry's WiFi to Ethernet
 
 ![preview image](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/webui_default_dnsmasq.png)
 
-
 ___
 
 
 ### Set up
 
-*This is the first version of this guide thus it may have errors, help us to improve it. Please open an issue for any problem*
+*This is the first version of this guide thus it may have errors, help me to improve it. Please open an issue for any problem*
 
 To start with, you should have a Raspberry Pi running Raspbian (Stretch for now).
 
