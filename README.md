@@ -1,4 +1,4 @@
-![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.1--beta-yellow.svg?style=flat-square)
+![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.2--beta-yellow.svg?style=flat-square)
 
 
 # PiLanshare
