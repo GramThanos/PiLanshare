@@ -17,11 +17,11 @@ To start with, you should have a Raspberry Pi running Raspbian (Stretch for now)
 
 All the commands bellow should run on the Raspberry Pi.
 
-#### Install dnsmasq
+#### Install dnsmasq & iptables
 
 First you will have to install dnsmasq by running
 ```shell
-sudo apt install dnsmasq
+sudo apt install iptables dnsmasq
 ```
 
 #### Create Config
