@@ -73,7 +73,7 @@ sudo chmod +x /usr/local/sbin/lan-share.sh
 
 # Make it only root accessible
 sudo chown root:root /usr/local/sbin/lan-share.sh
-sudo chmod 700 /home/pi/lanshare-actions.sh
+sudo chmod 700 /usr/local/sbin/lan-share.sh
 ```
 
 The `lan-share.sh` is based on the [stack-overflow question](https://raspberrypi.stackexchange.com/questions/48307/sharing-the-pis-wifi-connection-through-the-ethernet-port)'s answers.
