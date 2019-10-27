@@ -11,15 +11,44 @@ ___
 
 ### Setup
 
-Install daemon
+Install PiLanshare Daemon and WebUI
 
 ```cmd
-wget https://raw.githubusercontent.com/GramThanos/PiLanshare/master/install.py
-sudo python3 ./install.py
+wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install.py
+sudo python3 ./install.py -v
 ```
 
-Then download the webui folder and set it up as a page on your webserver.
-Default credentials are username `admin` and password `admin`.
+### Configuration
+
+Apart from the WebUI configuration, you can configure the PiLanshare daemon by creating a `pilanshare.ini` file at your Raspberry's boot partition (located at `/boot/`).
+
+Example `pilanshare.ini`
+```ini
+[DAEMON]
+log_level = info
+
+[IPTABLES]
+enable = True
+interface_source = wlan0
+interface_target = eth0
+ip_address = 192.168.3.1
+netmask = 255.255.255.0
+
+[DNSMASQ]
+enable = True
+interface = eth0
+dhcp_start = 192.168.3.20
+dhcp_end = 192.168.3.255
+dhcp_netmask = 255.255.255.0
+dhcp_broadcast = 192.168.3.255
+dhcp_lease_time = 12h
+router_ip_address = 192.168.3.1
+router_domain_name = pilanshare.local
+
+[DNSMASQ_BINDS]
+00:01:02:03:04:05 = 192.168.3.10
+02:04:06:08:0A:0C = 192.168.3.11
+```
 
 ___
 
