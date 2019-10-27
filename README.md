@@ -11,7 +11,15 @@ ___
 
 ### Setup
 
-To be written ... :P
+Install daemon
+
+```cmd
+wget https://raw.githubusercontent.com/GramThanos/PiLanshare/master/install.py
+sudo python3 ./install.py
+```
+
+Then download the webui folder and set it up as a page on your webserver.
+Default credentials are username `admin` and password `admin`.
 
 ___
 
