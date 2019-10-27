@@ -5,6 +5,15 @@
  * WebUI CSS
  */
 
+
+/* General
+ -----------------------------------*/
+@font-face {
+	font-family: 'Quicksand';
+	src: url('../webfonts/Quicksand-Regular.woff') format('woff'), /* Modern Browsers */
+		 url('../webfonts/Quicksand-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
+}
+
 body {
 	font-family: 'Quicksand', sans-serif;
 }
@@ -28,6 +37,8 @@ body {
 	}
 }
 
+/* Login
+ -----------------------------------*/
 .login .login-form {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -46,4 +57,81 @@ body {
 
 .login .alert {
 	margin-top: 15px;
+}
+
+/* Sidebar
+ -----------------------------------*/
+.side-menu {
+	margin: 20px 0 0 0;
+	padding-left: 0;
+    padding-right: 0;
+}
+.side-menu .nav {
+	width: 100%;
+}
+.side-menu .fas,
+.side-menu .fab {
+	width: 22px;
+	text-align: center;
+}
+
+/* Dashboard
+ -----------------------------------*/
+.card-shortcut {
+	text-align: center;
+	color: white;
+}
+.card-shortcut .stretched-link {
+	line-height: 35px;
+	text-decoration: none!important;
+	color: white;
+	font-size: 28px;
+}
+.card-shortcut .stretched-link:hover:after {
+	box-shadow: 1px 1px 4px #6d6d6d;
+}
+
+/* Full card table
+ -----------------------------------*/
+.table-full-card {
+	margin-bottom: 0;
+	margin-top: -1px;
+}
+
+/* Network Stats
+ -----------------------------------*/
+.stats-card td:nth-child(1) {
+	width: 90px;
+}
+.stats-card td:nth-child(2),
+.stats-card td:nth-child(3)  {
+	text-align: center;
+}
+
+.stats-card .fas {
+	color: #696969;
+	width: 12px;
+	text-align: center;
+}
+
+.chart-wrapper {
+	padding-top: 20px;
+}
+
+/* DataTables
+ -----------------------------------*/
+.dataTables_info {
+	padding: 0.85em;
+}
+
+.dataTables_paginate {
+	padding: 0 0.85em;
+}
+
+.dataTables_length {
+	padding: 0.85em 0.85em 0 0.85em;
+}
+
+.dataTables_filter {
+	padding: 0.85em 0.85em 0 0.85em;
 }

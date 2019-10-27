@@ -84,8 +84,8 @@
 		<meta name="author" content="GramThanos">
 		<link rel='shortcut icon' type='image/x-icon' href='favicon.ico'/>
 
-		<!-- Google Font -->
-		<link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
+		<!-- Font-Awesome -->
+		<link rel="stylesheet" href="css/fontawesome.min.css">
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<!-- Custom Style -->
@@ -96,7 +96,7 @@
 		<!-- Top Bar -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="/"><?=htmlspecialchars(APP_NAME);?></a>
+				<a class="navbar-brand" href="./"><img src="images/logo-16.png" style="margin-bottom: 4px;"> <?=htmlspecialchars(APP_NAME);?></a>
 			</div>
 		</nav>
 
@@ -108,11 +108,11 @@
 					<!-- Login Form -->
 					<form method="POST" action="login.php">
 						<div class="form-group">
-							<label for="username">Username</label>
+							<label for="username"><i class="fas fa-user"></i> Username</label>
 							<input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
 						</div>
 						<div class="form-group">
-							<label for="password">Password</label>
+							<label for="password"><i class="fas fa-unlock"></i> Password</label>
 							<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 						</div>
 						<div class="form-group form-check">
@@ -140,26 +140,12 @@
 			<!-- Footer -->
 			<div class="row footer">
 				<div class="col col-12">
+					<i class="fab fa-github"></i>
 					<a href="<?=APP_WEBSITE;?>" target="_blank"><?=htmlspecialchars(APP_NAME);?></a>
 				</div>
 				<div class="col col-12">
+					<i class="fas fa-mug-hot"></i>
 					Created by <a href="https://github.com/GramThanos" target="_blank">GramThanos</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Action Loading Modal -->
-		<div class="modal fade" id="commandModal" tabindex="-1" role="dialog" aria-labelledby="commandModalLabel" aria-hidden="true" data-backdrop="static">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="commandModalLabel">Executing Action <span id="action-name"></span></h5>
-					</div>
-					<div class="modal-body">
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -169,8 +155,5 @@
 		<script src="js/popper.min.js"></script>
 		<!-- Bootstrap -->
 		<script src="js/bootstrap.min.js"></script>
-		<script src="js/bootbox.min.js"></script>
-		<!-- Custom Javascript -->
-		<script src="js/actions.js"></script>
 	</body>
 </html>

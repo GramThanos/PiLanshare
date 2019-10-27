@@ -18,16 +18,16 @@ function authenticate_list($username, $password) {
 
 	// For each user on the list
 	foreach (APP_LOGIN_TYPE_LIST as $_username => $_password_hash) {
-		if (
-			// Match username
-			$_username === $username &&
+		// Match username
+		if ($_username === $username) {
+			$info = explode('|', $_password_hash);
 			// Match pass hashes
-			$_password_hash === hash('sha256', $password)
-		) {
-			return array(
-				'id' => 1,
-				'username' => $_username
-			);
+			if ($info[1] === hash($info[0], $password)) {
+				return array(
+					'id' => 1,
+					'username' => $_username
+				);
+			}
 		}
 	}
 
