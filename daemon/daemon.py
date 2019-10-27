@@ -937,7 +937,9 @@ def pilanshare_run_dnsmasq(interface, dhcp_start, dhcp_end, dhcp_netmask, dhcp_b
 		'log-dhcp\n' +
 		'log-queries\n' +
 		'log-facility=' + DNSMASQ_LOG_FILE_PATH + '\n')
-
+	# Clear old config
+	#if os.path.exists(DNSMASQ_LOG_FILE_PATH):
+	#	os.remove(DNSMASQ_LOG_FILE_PATH)
 	# Create temporary config
 	with open('/tmp/custom-dnsmasq.conf', 'w') as file:
 		file.write(config)
