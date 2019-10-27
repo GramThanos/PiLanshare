@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# PiLanShare
+# https://github.com/GramThanos/PiLanshare/
 import os
 import re
 import sys
