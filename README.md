@@ -18,6 +18,8 @@ wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install
 sudo python3 ./install.py -v
 ```
 
+The default installation paths are, for the daemon `/etc/pilanshare` and for the WebUI `/var/www/html/pilanshare`. The installation script does not install or configure any webserver. It was tested on nginx 1.10.3 and PHP 7.0.33.
+
 ### Configuration
 
 Apart from the WebUI configuration, you can configure the PiLanshare daemon by creating a `pilanshare.ini` file at your Raspberry's boot partition (located at `/boot/`).
