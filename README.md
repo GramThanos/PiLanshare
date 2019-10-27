@@ -20,6 +20,11 @@ sudo python3 ./install.py -v
 
 The default installation paths are, for the daemon `/etc/pilanshare` and for the WebUI `/var/www/html/pilanshare`. The installation script does not install or configure any webserver. It was tested on nginx 1.10.3 and PHP 7.0.33.
 
+You can also download the ieee oui data, so that the WebUI can find the vendor name from the MAC address
+```cmd
+sudo wget -O /var/www/html/pilanshare/includes/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+```
+
 ### Configuration
 
 Apart from the WebUI configuration, you can configure the PiLanshare daemon by creating a `pilanshare.ini` file at your Raspberry's boot partition (located at `/boot/`).
