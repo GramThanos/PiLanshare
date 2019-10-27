@@ -6,11 +6,16 @@ import re
 import sys
 import getopt
 import shutil
+import random
+import tarfile
 import logging
+import hashlib
+import getpass
 import subprocess
 import urllib.error
 import urllib.request
-
+import distutils
+from distutils import dir_util
 
 
 ''' Configuration
@@ -26,19 +31,21 @@ GITHUB_URL = 'https://github.com/GramThanos/PiLanshare/'
 
 # Default parameters
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
+SCRIPT_CWD = os.getcwd()
 VERBOSE = False
 INSTALLATION_PATH = '/etc/pilanshare'
 WEBUI_INSTALLATION_PATH = '/var/www/html/pilanshare'
 IGNORE_VERSION = False
 FORCE_WEBINSTALL = False
-WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/master/daemon'
-WEBINSTALL_WEBUI_URL = 'https://github.com/GramThanos/PiLanshare/releases/download/v0.3.0/PiLanshare_WebUI.zip'
+#WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/master/daemon'
+WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/daemon'
+WEBINSTALL_WEBUI_URL = 'https://github.com/GramThanos/PiLanshare/releases/download/v0.3.0-beta/PiLanshare_WebUI.zip'
 RUN_UNINSTALL = False
 
 # Global Variables
-downloaded_content_daemon_py = ''
-downloaded_content_default_ini = ''
-downloaded_webui_path = ''
+downloaded_content_daemon_py = None
+downloaded_content_default_ini = None
+downloaded_webui_path = None
 
 
 
@@ -88,6 +95,12 @@ def main():
 		remove_installation();
 		# Install PiLanShare
 		run_installation()
+		# Download WebUI files
+		prepare_webui_installation();
+		# Install WebUI
+		run_webui_installation()
+		# Configure
+		configure_webui()
 
 def parse_script_arguments():
 	global VERBOSE, INSTALLATION_PATH, IGNORE_VERSION, FORCE_WEBINSTALL, WEBINSTALL_DAEMON_URL, WEBINSTALL_WEBUI_URL, RUN_UNINSTALL
@@ -214,7 +227,10 @@ def throw_error(error):
 	sys.exit(1)
 
 def run_command(command):
-	return subprocess.run(command, shell=True, check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	if isinstance(command, str):
+		return subprocess.run(command, shell=True, check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	else:
+		return subprocess.run(command, check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 def run_command_assert(command, error):
 	logging.debug(command)
@@ -232,7 +248,11 @@ def get_url_content(url):
 	except urllib.error.URLError as e:
 		return None
 	else:
-		return content.decode('utf-8')
+		return content
+
+def get_url_content_utf8(url):
+	content = get_url_content(url)
+	return content.decode('utf-8') if content else None
 
 def query_yes_no(question, default="yes"):
 	"""
@@ -329,11 +349,10 @@ def prepare_check_installation():
 def prepare_installation():
 	global downloaded_content_daemon_py
 	global downloaded_content_default_ini
-	global downloaded_webui_path
 	logging.info('Preparing installation ...')
 	# Check if there are daemon files in local path
-	local_daemon_py_path = os.path.join(SCRIPT_PATH, 'daemon', 'daemon.py')
-	local_default_ini_path = os.path.join(SCRIPT_PATH, 'daemon', 'default.ini')
+	local_daemon_py_path = os.path.join(SCRIPT_CWD, 'daemon', 'daemon.py')
+	local_default_ini_path = os.path.join(SCRIPT_CWD, 'daemon', 'default.ini')
 	if not FORCE_WEBINSTALL and os.path.isfile(local_daemon_py_path) and os.path.isfile(local_default_ini_path):
 		logging.debug('Loading local daemon files ...')
 		try:
@@ -349,7 +368,7 @@ def prepare_installation():
 	else:
 		# Daemon script
 		logging.debug('Downloading daemon script ...')
-		downloaded_content_daemon_py = get_url_content(WEBINSTALL_DAEMON_URL + '/daemon.py')
+		downloaded_content_daemon_py = get_url_content_utf8(WEBINSTALL_DAEMON_URL + '/daemon.py')
 		if downloaded_content_daemon_py == None:
 			throw_error('Failed to download daemon script!')
 		# Check if version mismatch
@@ -358,7 +377,7 @@ def prepare_installation():
 			throw_error('The version of the daemon script does not match with the install script version!')
 		# Default configuration
 		logging.debug('Downloading default daemon configuration ...')
-		downloaded_content_default_ini = get_url_content(WEBINSTALL_DAEMON_URL + '/default.ini')
+		downloaded_content_default_ini = get_url_content_utf8(WEBINSTALL_DAEMON_URL + '/default.ini')
 		if downloaded_content_default_ini == None:
 			throw_error('Failed to download default daemon configuration!')
 
@@ -459,6 +478,95 @@ def run_installation():
 	# Done
 	logging.info(NAME + ' ' + VERSION + ' was installed!')
 
+def prepare_webui_installation():
+	global downloaded_webui_path
+	logging.info('Preparing WebUI installation ...')
+	# Check if there is WebUI folder in local path
+	local_webui_folder_path = os.path.join(SCRIPT_CWD, 'webui')
+	if not FORCE_WEBINSTALL and os.path.isdir(local_webui_folder_path):
+		downloaded_webui_path = local_webui_folder_path
+	# Get WebUI tar from web
+	else:
+		# Daemon script
+		logging.debug('Downloading WebUI tar ...')
+		webui_tar = get_url_content(WEBINSTALL_WEBUI_URL)
+		if webui_tar == None:
+			throw_error('Failed to download WebUI tar!')
+		# Create dir
+		if not os.path.isdir(WEBUI_INSTALLATION_PATH):
+			try:
+				os.mkdir(WEBUI_INSTALLATION_PATH)
+			except OSError:
+				print ('Failed to create WebUI folder')
+		# Save WebUI tar
+		downloaded_webui_path = os.path.join(WEBUI_INSTALLATION_PATH, 'WebUI.tar')
+		with open(downloaded_webui_path, 'wb') as file:
+			file.write(webui_tar)
+			file.close()
+		# Download ieee oui.txt
+		# wget -O oui.txt http://standards-oui.ieee.org/oui/oui.txt
+
+def run_webui_installation():
+	# Move files
+	if os.path.isdir(downloaded_webui_path):
+		distutils.dir_util.copy_tree(downloaded_webui_path, WEBUI_INSTALLATION_PATH)
+	# Extract files
+	else :
+		tar = tarfile.open(downloaded_webui_path) 
+		tar.extractall(path=WEBUI_INSTALLATION_PATH)
+		tar.close()
+		# Delete file
+		os.remove(downloaded_webui_path)
+	#run_command_assert(['chown', '-R', 'root', WEBUI_INSTALLATION_PATH], 'Failed to apply WebUI files chown.')
+	run_command_assert(['chgrp', '-R', 'www-data', WEBUI_INSTALLATION_PATH], 'Failed to apply WebUI files chgrp.')
+	run_command_assert(['chmod', '-R', '750', WEBUI_INSTALLATION_PATH], 'Failed to apply WebUI files chown.')
+	run_command_assert(['chmod', 'g+s', WEBUI_INSTALLATION_PATH], 'Failed to apply WebUI folder chown.')
+	# Done
+	logging.info(NAME + ' WebUI was installed!')
+
+def configure_webui():
+	# Set username and password
+	config_path = os.path.join(WEBUI_INSTALLATION_PATH, 'includes', 'config.php')
+	config_content = '';
+	with open(config_path, 'r') as file:
+		config_content = file.read()
+		file.close()
+	# Credentials
+	login_list_line = re.findall(r"(define\('APP_LOGIN_TYPE_LIST',[^;]+;)", config_content)
+	if not login_list_line:
+		throw_error('Failed parse WebUI config file.')
+	login_list_line = login_list_line[0]
+	sys.stdout.write('Set your WebUI credentials\n')
+	username = ''
+	password_hash = ''
+	salt = ''.join(random.choice('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') for i in range(16))
+	while True:
+		sys.stdout.write('Username: ')
+		username = input()
+		if len(username) > 3 and len(username) < 64 and re.match(r"^[a-zA-Z0-9_]+$", username):
+			break;
+		else:
+			sys.stdout.write('Should be more than 3 characters and less than 64.\nAccepts only letters, numbers and underscores.\n')
+	while True:
+		#sys.stdout.write('Password: ')
+		password = getpass.getpass('Password: ')
+		if len(password) > 3:
+			password_hash = hashlib.sha256((password + salt).encode()).hexdigest()
+			#sys.stdout.write('Confirm Password: ')
+			password_confirm = getpass.getpass('Confirm Password: ')
+			if password == password_confirm:
+				break;
+			else:
+				sys.stdout.write('Passwords do not match! Try again.\n')
+		else:
+			sys.stdout.write('Should be more than 3 characters.\n')
+	config_content = config_content.replace(login_list_line, "define('APP_LOGIN_TYPE_LIST', array('" + username + "' => 'sha256|" + password_hash + "|" + salt + "'));")
+	# Save changes
+	with open(config_path, 'w') as file:
+		file.write(config_content)
+		file.close()
+	# Done
+	logging.info('WebUI credentials were changed.')
 
 
 ''' Script start
