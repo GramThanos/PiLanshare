@@ -32,10 +32,8 @@ ___
 
 ### What's next?
 
-- Create installation scripts
-- Improve the WebUI
-- Add more configuration options
-
+- Improve installation script
+  - Implement WebUI installation
 
 ___
 
