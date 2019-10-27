@@ -230,7 +230,7 @@ def get_url_content(url):
 	except urllib.error.URLError as e:
 		return None
 	else:
-		return content
+		return content.decode('utf-8')
 
 def query_yes_no(question, default="yes"):
 	"""
@@ -351,7 +351,8 @@ def prepare_installation():
 		if downloaded_content_daemon_py == None:
 			throw_error('Failed to download daemon script!')
 		# Check if version mismatch
-		if not IGNORE_VERSION and not re.match(r"VERSION\s*=\s*'" + VERSION + "'", value):
+		daemon_version = re.findall(r"VERSION\s*=\s*'([^']+)'", downloaded_content_daemon_py)
+		if not IGNORE_VERSION and daemon_version[0] != VERSION:
 			throw_error('The version of the daemon script does not match with the install script version!')
 		# Default configuration
 		logging.debug('Downloading default daemon configuration ...')
