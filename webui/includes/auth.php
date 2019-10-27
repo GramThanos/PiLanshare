@@ -21,8 +21,10 @@ function authenticate_list($username, $password) {
 		// Match username
 		if ($_username === $username) {
 			$info = explode('|', $_password_hash);
+			// If salt
+			$salt = (count($info) > 2) ? $info[2] : '';
 			// Match pass hashes
-			if ($info[1] === hash($info[0], $password)) {
+			if ($info[1] === hash($info[0], $password . $salt)) {
 				return array(
 					'id' => 1,
 					'username' => $_username
