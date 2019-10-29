@@ -1,4 +1,4 @@
-![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.0--beta-yellow.svg?style=flat-square)
+![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.0--beta-green.svg?style=flat-square) ![dev-version](https://img.shields.io/badge/Dev%20PiLanshare-v0.3.1--beta-yellow.svg?style=flat-square)
 
 
 # PiLanshare
@@ -12,7 +12,7 @@ ___
 ### Setup
 
 #### Install from the web
-Install PiLanshare Daemon and WebUI
+Install pre-release v0.3.0-beta PiLanshare Daemon and WebUI
 
 ```cmd
 wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install.py
