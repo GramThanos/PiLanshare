@@ -11,11 +11,13 @@ ___
 
 ### Setup
 
+#### Install from the web
 Install PiLanshare Daemon and WebUI
 
 ```cmd
 wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install.py
 sudo python3 ./install.py -v
+rm ./install.py
 ```
 
 The default installation paths are, for the daemon `/etc/pilanshare` and for the WebUI `/var/www/html/pilanshare`. The installation script does not install or configure any webserver. It was tested on nginx 1.10.3 and PHP 7.0.33.
@@ -23,6 +25,16 @@ The default installation paths are, for the daemon `/etc/pilanshare` and for the
 You can also download the ieee oui data, so that the WebUI can find the vendor name from the MAC address
 ```cmd
 sudo wget -O /var/www/html/pilanshare/includes/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+```
+
+#### Install by clonning the git repo
+Install latest development version of PiLanshare Daemon and WebUI
+
+```cmd
+sudo apt install python3-distutils
+git clone https://github.com/GramThanos/PiLanshare.git
+cd ./PiLanshare
+sudo python3 ./install.py -v
 ```
 
 ### Configuration
