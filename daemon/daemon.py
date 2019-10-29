@@ -337,11 +337,13 @@ def setup_daemon_socket():
 	logging.info('Setting up a socket on %s' % SOCKET_FILE_PATH)
 	sock.bind(SOCKET_FILE_PATH)
 	os.chmod(SOCKET_FILE_PATH, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IWGRP | stat.S_IROTH | stat.S_IWOTH)
+	logging.debug('Socket is ready')
 	# Return socket
 	return sock
 
 # Handle daemon socket
 def handler_daemon_socket(sock):
+	logging.info('Daemon is now listening for socket connections')
 	# Listen for incoming connections
 	sock.listen(1)
 	# Wait for a connections
