@@ -96,7 +96,7 @@
 											</tr>
 											<tr>
 												<td>Temperature</td>
-												<td><?=htmlspecialchars(system_temp_celsius() + '');?>°C</td>
+												<td><?=htmlspecialchars(system_temp_celsius() . '');?>°C</td>
 											</tr>
 										</tbody>
 									</table>
