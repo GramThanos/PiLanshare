@@ -32,6 +32,7 @@ Install latest development version of PiLanshare Daemon and WebUI
 
 ```cmd
 sudo apt install python3-distutils
+sudo apt install git
 git clone https://github.com/GramThanos/PiLanshare.git
 cd ./PiLanshare
 sudo python3 ./install.py -v
