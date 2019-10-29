@@ -11,26 +11,26 @@ define('API_DAEMON_SOCKET_URI', 'unix://' . realpath(API_DAEMON_SOCKET));
 
 // Communicate using socket
 function socket_request($request) {
-	# Connect on socket
+	// Connect on socket
 	$fp = @stream_socket_client(API_DAEMON_SOCKET_URI, $errno, $errstr, 30);
 	
-	# If connection failed
+	// If connection failed
 	if (!$fp) {
 		$response = NULL;
 	}
 
-	# Connection successful
+	// Connection successful
 	else {
-		# Send command
+		// Send command
 		fwrite($fp, json_encode($request));
-		# Get response
+		// Get response
 		$json = '';
 		while (!feof($fp)) {
 			$json .= fgets($fp, 1024);
 		}
 		fclose($fp);
 
-		# Parse response
+		// Parse response
 		$response = json_decode($json, true);
 	}
 	
