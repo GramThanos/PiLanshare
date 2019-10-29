@@ -30,7 +30,7 @@ define('APP_SESSION_AUTO_REGENERATE_INTERVAL', 60);
 
 // API Configuration
 define('API_USE_CSRF_TOKEN', true); // Requires APP_LOGIN true
-define('API_DAEMON_SOCKET', '/tmp/pilanshare.sock');
+define('API_DAEMON_SOCKET', '/etc/pilanshare/daemon.sock');
 
 // IEEE OUI text file
 // Download file `wget http://standards-oui.ieee.org/oui/oui.txt`
