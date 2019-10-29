@@ -15,7 +15,6 @@ import subprocess
 import urllib.error
 import urllib.request
 import distutils
-from distutils import dir_util
 
 
 ''' Configuration
