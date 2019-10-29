@@ -23,7 +23,7 @@ import distutils
 # Info
 NAME = 'PiLanShare'
 TAG = 'PiLanShare'
-VERSION = 'v0.3.0-beta'
+VERSION = 'v0.3.1-beta'
 AUTHOR = 'GramThanos'
 AUTHOR_GITHUB = 'https://github.com/GramThanos'
 GITHUB_URL = 'https://github.com/GramThanos/PiLanshare/'
@@ -37,8 +37,8 @@ WEBUI_INSTALLATION_PATH = '/var/www/html/pilanshare'
 IGNORE_VERSION = False
 FORCE_WEBINSTALL = False
 #WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/master/daemon'
-WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/daemon'
-WEBINSTALL_WEBUI_URL = 'https://github.com/GramThanos/PiLanshare/releases/download/v0.3.0-beta/PiLanshare_WebUI.zip'
+WEBINSTALL_DAEMON_URL = 'https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.1-beta/daemon'
+WEBINSTALL_WEBUI_URL = 'https://github.com/GramThanos/PiLanshare/releases/download/v0.3.1-beta/PiLanshare_WebUI.tar'
 RUN_UNINSTALL = False
 
 # Global Variables

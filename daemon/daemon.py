@@ -21,7 +21,7 @@ import datetime
 # Static variables
 NAME						= 'PiLanShare'
 TAG							= 'PiLanShare'
-VERSION						= 'v0.3.0-beta'
+VERSION						= 'v0.3.1-beta'
 DAEMON_PATH					= os.path.dirname(os.path.realpath(__file__))
 #SOCKET_FILE_PATH			= '/tmp/pilanshare.sock'
 SOCKET_FILE_PATH			= os.path.join(DAEMON_PATH, 'daemon.sock')
