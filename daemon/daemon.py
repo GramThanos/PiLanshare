@@ -119,7 +119,8 @@ def init_configuration():
 
 # Load configuration function
 def load_configuration():
-	config = configparser.SafeConfigParser(delimiters=('='))
+	#config = configparser.SafeConfigParser(delimiters=('='))
+	config = configparser.ConfigParser(delimiters=('='))
 	config.read(CONFIG_DEFAULT_FILE_PATH)
 	if os.path.isfile(CONFIG_SAVED_FILE_PATH):
 		config.read(CONFIG_SAVED_FILE_PATH)
