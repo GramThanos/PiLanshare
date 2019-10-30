@@ -9,7 +9,7 @@
 // App Info
 define('APP_NAME', 'PiLanshare WebUI');
 define('APP_DESCRIPTION', 'Monitor your Pi\'s Lanshare');
-define('APP_VERSION', 'v0.3-beta');
+define('APP_VERSION', 'v0.3.1-beta');
 define('APP_WEBSITE', 'https://github.com/GramThanos/PiLanshare');
 define('APP_DEBUG', true);
 define('APP_ROOT_PATH', dirname(__DIR__));
