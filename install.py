@@ -14,7 +14,6 @@ import getpass
 import subprocess
 import urllib.error
 import urllib.request
-import distutils
 
 
 ''' Configuration
@@ -506,9 +505,22 @@ def prepare_webui_installation():
 		# wget -O oui.txt http://standards-oui.ieee.org/oui/oui.txt
 
 def run_webui_installation():
-	# Move files
+	# Copy files
 	if os.path.isdir(downloaded_webui_path):
-		distutils.dir_util.copy_tree(downloaded_webui_path, WEBUI_INSTALLATION_PATH)
+		# Delete old files
+		for item in os.listdir(WEBUI_INSTALLATION_PATH):
+			item_path = os.path.join(WEBUI_INSTALLATION_PATH, item)
+			if os.path.isfile(item_path):
+				os.unlink(item_path)
+			elif os.path.isdir(item_path):
+				shutil.rmtree(item_path)
+		# Copy files
+		for item in os.listdir(downloaded_webui_path):
+			item_path = os.path.join(downloaded_webui_path, item)
+			if os.path.isfile(item_path):
+				shutil.copy2(item_path, WEBUI_INSTALLATION_PATH)
+			elif os.path.isdir(item_path):
+				shutil.copytree(item_path, os.path.join(WEBUI_INSTALLATION_PATH, item))
 	# Extract files
 	else :
 		tar = tarfile.open(downloaded_webui_path) 
