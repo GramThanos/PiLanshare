@@ -495,7 +495,7 @@ def prepare_webui_installation():
 			try:
 				os.mkdir(WEBUI_INSTALLATION_PATH)
 			except OSError:
-				print ('Failed to create WebUI folder')
+				throw_error('Failed to create WebUI folder')
 		# Save WebUI tar
 		downloaded_webui_path = os.path.join(WEBUI_INSTALLATION_PATH, 'WebUI.tar')
 		with open(downloaded_webui_path, 'wb') as file:
