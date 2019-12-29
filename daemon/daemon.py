@@ -446,11 +446,11 @@ def pilanshare_action_get_interfaces(request):
 		# Get info
 		interface = netifaces.ifaddresses(name)
 		interfaces[name] = {}
-		if interface[netifaces.AF_LINK]:
+		if netifaces.AF_LINK in interface:
 			interfaces[name]['LINK'] = interface[netifaces.AF_LINK]
-		if interface[netifaces.AF_INET]:
+		if netifaces.AF_INET in interface:
 			interfaces[name]['INET'] = interface[netifaces.AF_INET]
-		if interface[netifaces.AF_INET6]:
+		if netifaces.AF_INET6 in interface:
 			interfaces[name]['INET6'] = interface[netifaces.AF_INET6]
 	logging.debug('Found info for ' + str(count) + ' interfaces')
 	return interfaces
