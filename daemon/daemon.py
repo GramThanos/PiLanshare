@@ -867,15 +867,22 @@ def pilanshare_run_iptables(source, target, ip_address, netmask, ipForward, remo
 	try:
 		# Start network wait
 		subprocess.check_output('systemctl start network-online.target', shell=True)
-		# Setup iptables
+		# Setup iptables (IPv4)
 		subprocess.check_output('iptables -F', shell=True)
 		subprocess.check_output('iptables -t nat -F', shell=True)
 		subprocess.check_output('iptables -t nat -A POSTROUTING -o ' + source + ' -j MASQUERADE', shell=True)
 		subprocess.check_output('iptables -A FORWARD -i ' + source + ' -o ' + target + ' -m state --state RELATED,ESTABLISHED -j ACCEPT', shell=True)
 		subprocess.check_output('iptables -A FORWARD -i ' + target + ' -o ' + source + ' -j ACCEPT', shell=True)
+		# Setup ip6tables (IPv6)
+		subprocess.check_output('ip6tables -F', shell=True)
+		subprocess.check_output('ip6tables -t nat -F', shell=True)
+		subprocess.check_output('ip6tables -t nat -A POSTROUTING -o ' + source + ' -j MASQUERADE', shell=True)
+		subprocess.check_output('ip6tables -A FORWARD -i ' + source + ' -o ' + target + ' -m state --state RELATED,ESTABLISHED -j ACCEPT', shell=True)
+		subprocess.check_output('ip6tables -A FORWARD -i ' + target + ' -o ' + source + ' -j ACCEPT', shell=True)
 		# Enable IP forward
 		if ipForward:
 			subprocess.check_output('echo 1 > /proc/sys/net/ipv4/ip_forward', shell=True)
+			subprocess.check_output('echo 1 > /proc/sys/net/ipv6/conf/all/forwarding', shell=True)
 		# Configure net
 		subprocess.check_output('ifconfig ' + target + ' ' + ip_address + ' netmask ' + netmask + '', shell=True)
 		# Remove default route created by dhcpcd
