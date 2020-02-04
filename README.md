@@ -120,7 +120,7 @@ This project is under [The MIT license](https://opensource.org/licenses/MIT).
 I do although appreciate attribution.
 The libraries used on the WebUI page have their own licenses.
 
-Copyright (c) 2019 Grammatopoulos Athanasios-Vasileios
+Copyright (c) 2020 Grammatopoulos Athanasios-Vasileios
 
 ___
 
