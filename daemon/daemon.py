@@ -603,7 +603,7 @@ def pilanshare_action_get_dnsmasq_queries(request):
 	#if result.returncode != 0:
 	#	return {"error": "Get dnsmasq queries failed."}
 	# Parse results
-	data = re.findall(r"(\w+ \d+ \d+:\d+:\d+) [^\]]+\[\d+\]: query\[(\w+)\] (\S+) from (\S+)", result.stdout.decode('utf-8'))
+	data = re.findall(r"(\w+\s+\d+\s+\d+:\d+:\d+)\s+[^\]]+\[\d+\]:\s+query\[(\w+)\]\s+(\S+)\s+from\s+(\S+)", result.stdout.decode('utf-8'))
 	queries = []
 	now = datetime.datetime.now()
 	for query in data:
