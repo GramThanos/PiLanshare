@@ -47,8 +47,8 @@
 		foreach ($traffic as $interface) {
 			if (isset($interface['rx']) && isset($interface['rx']['bytes']))
 				$total += $interface['rx']['bytes'];
-			if (isset($interface['tx']) && isset($interface['rx']['bytes']))
-				$total += $interface['rx']['bytes'];
+			if (isset($interface['tx']) && isset($interface['tx']['bytes']))
+				$total += $interface['tx']['bytes'];
 		}
 		$traffic = bytes_to_readable_text($total);
 	}
