@@ -12,6 +12,7 @@ import configparser
 import subprocess
 import threading
 import datetime
+import ipaddress
 
 
 
@@ -886,8 +887,18 @@ def pilanshare_run_iptables(source, target, ip_address, netmask, ipForward, remo
 		# Configure net
 		subprocess.check_output('ifconfig ' + target + ' ' + ip_address + ' netmask ' + netmask + '', shell=True)
 		# Remove default route created by dhcpcd
+		print('==========================test')
 		if removeRoutes:
 			subprocess.run('ip route del 0/0 dev ' + target + '', shell=True, check=False)
+			# Get rules on target
+			iprules = subprocess.run(
+				'ip route list | grep \'' + target + '\' | grep --invert-match \'metric\'',
+				shell=True, check=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+			)
+			print(iprules)
+			# ip route list | grep 'eth0' | grep --invert-match 'metric'
+		# Add route
+		print('ip route add ' + str(ipaddress.ip_network(ip_address + '/' + netmask, strict=False)) + ' dev ' + target + ' proto kernel scope link src ' + ip_address + '')
 	except subprocess.CalledProcessError as e:
 		logging.error(e.output)
 		return False
