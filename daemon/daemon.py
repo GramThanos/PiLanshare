@@ -890,9 +890,8 @@ def pilanshare_run_iptables(source, target, ip_address, netmask, ipForward, remo
 		if removeRoutes:
 			subprocess.run('ip route del 0/0 dev ' + target + '', shell=True, check=False)
 		# Add route
-		print('==========================test')
-		print('ip route flush ' + str(ipaddress.ip_network(ip_address + '/' + netmask, strict=False)) + '')
-		print('ip route add ' + str(ipaddress.ip_network(ip_address + '/' + netmask, strict=False)) + ' dev ' + target + ' proto kernel scope link src ' + ip_address + '')
+		subprocess.run('ip route flush ' + str(ipaddress.ip_network(ip_address + '/' + netmask, strict=False)) + '', shell=True, check=False)
+		subprocess.run('ip route add ' + str(ipaddress.ip_network(ip_address + '/' + netmask, strict=False)) + ' dev ' + target + ' proto kernel scope link src ' + ip_address + '', shell=True, check=False)
 	except subprocess.CalledProcessError as e:
 		logging.error(e.output)
 		return False
