@@ -103,7 +103,7 @@ def main():
 def parse_script_arguments():
 	global VERBOSE, INSTALLATION_PATH, IGNORE_VERSION, FORCE_WEBINSTALL, WEBINSTALL_DAEMON_URL, WEBINSTALL_WEBUI_URL, RUN_UNINSTALL
 
-	try:
+	try:# maybe change to 'vhi:w:' (needs testing)
 		opts, args = getopt.getopt(sys.argv[1:], 'vhiw', ['verbose', 'help', 'install_path=', 'webui_install_path=', 'ignore_version', 'force_webinstall', 'webinstall_daemon_url=', 'webinstall_webui_url=', 'uninstall'])
 	except getopt.GetoptError as err:
 		print(err)
