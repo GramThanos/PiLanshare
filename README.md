@@ -16,6 +16,7 @@ Install pre-release v0.3.0-beta PiLanshare Daemon and WebUI
 
 ```cmd
 wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install.py
+sudo apt install python3-distutils
 sudo python3 ./install.py -v
 rm ./install.py
 ```
