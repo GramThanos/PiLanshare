@@ -506,7 +506,7 @@ def prepare_webui_installation():
 
 def run_webui_installation():
 	# If path exists
-	if os.path.isdir(downloaded_webui_path):
+	if os.path.isdir(WEBUI_INSTALLATION_PATH):
 		# Delete old files
 		for item in os.listdir(WEBUI_INSTALLATION_PATH):
 			item_path = os.path.join(WEBUI_INSTALLATION_PATH, item)
