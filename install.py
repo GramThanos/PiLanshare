@@ -505,7 +505,7 @@ def prepare_webui_installation():
 		# wget -O oui.txt http://standards-oui.ieee.org/oui/oui.txt
 
 def run_webui_installation():
-	# If path exists
+	# If path exists, needs to be cleaned
 	if os.path.isdir(WEBUI_INSTALLATION_PATH):
 		# Delete old files
 		for item in os.listdir(WEBUI_INSTALLATION_PATH):
@@ -514,17 +514,20 @@ def run_webui_installation():
 				os.unlink(item_path)
 			elif os.path.isdir(item_path):
 				shutil.rmtree(item_path)
-		# Copy files
+	# Else create folder
+	else:
+		os.makedirs(WEBUI_INSTALLATION_PATH)
+	# If webui path is a directory
+	if os.path.isdir(downloaded_webui_path):
+		# Copy webui files
 		for item in os.listdir(downloaded_webui_path):
 			item_path = os.path.join(downloaded_webui_path, item)
 			if os.path.isfile(item_path):
 				shutil.copy2(item_path, WEBUI_INSTALLATION_PATH)
 			elif os.path.isdir(item_path):
 				shutil.copytree(item_path, os.path.join(WEBUI_INSTALLATION_PATH, item))
-	# Path does not exists
+	# If webui is a file
 	else :
-		# Create folder
-		os.makedirs(WEBUI_INSTALLATION_PATH)
 		# Extract files
 		tar = tarfile.open(downloaded_webui_path) 
 		tar.extractall(path=WEBUI_INSTALLATION_PATH)
