@@ -26,6 +26,7 @@ The default installation paths are, for the daemon `/etc/pilanshare` and for the
 You can also download the ieee oui data, so that the WebUI can find the vendor name from the MAC address
 ```cmd
 sudo wget -O /var/www/html/pilanshare/includes/oui.txt http://standards-oui.ieee.org/oui/oui.txt
+sudo chown root:www-data /var/www/html/pilanshare/includes/oui.txt
 ```
 
 #### Install by clonning the git repo
