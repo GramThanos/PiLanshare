@@ -1,4 +1,4 @@
-![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.0--beta-green.svg?style=flat-square) ![dev-version](https://img.shields.io/badge/Dev%20PiLanshare-v0.3.1--beta-yellow.svg?style=flat-square)
+![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.1--beta-green.svg?style=flat-square) ![dev-version](https://img.shields.io/badge/Dev%20PiLanshare-v0.3.1--beta-yellow.svg?style=flat-square)
 
 
 # PiLanshare
@@ -12,11 +12,11 @@ ___
 ### Setup
 
 #### Install from the web
-Install pre-release v0.3.0-beta PiLanshare Daemon and WebUI
+Install pre-release v0.3.1-beta PiLanshare Daemon and WebUI
 
 ```cmd
-wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.0-beta/install.py
 sudo apt install python3-distutils
+wget https://raw.githubusercontent.com/GramThanos/PiLanshare/v0.3.1-beta/install.py
 sudo python3 ./install.py -v
 rm ./install.py
 ```
@@ -89,19 +89,11 @@ ___
 ___
 
 
-### What's next?
-
-- Improve installation script
-  - Implement WebUI installation
-
-___
-
-
 ### Contribute to the project
 
-Leave your feedback or to express your thoughts!
+Leave your feedback, express your thoughts or contribute code to this project!
 
-You can [open an issue](https://github.com/GramThanos/PiLanshare/issues) or [send me a mail](mailto:gramthanos@gmail.com)
+You can [open an issue](https://github.com/GramThanos/PiLanshare/issues) or even create a [pull request](https://github.com/GramThanos/PiLanshare/compare)
 
 
 ___
@@ -122,7 +114,7 @@ This project is under [The MIT license](https://opensource.org/licenses/MIT).
 I do although appreciate attribution.
 The libraries used on the WebUI page have their own licenses.
 
-Copyright (c) 2020 Grammatopoulos Athanasios-Vasileios
+Copyright (c) 2023 Grammatopoulos Athanasios-Vasileios
 
 ___
 
