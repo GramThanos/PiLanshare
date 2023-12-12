@@ -1,4 +1,4 @@
-![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.1--beta-green.svg?style=flat-square) ![dev-version](https://img.shields.io/badge/Dev%20PiLanshare-v0.3.1--beta-yellow.svg?style=flat-square)
+![GramThanos](https://raw.githubusercontent.com/GramThanos/PiLanshare/master/preview/icon.png) ![version](https://img.shields.io/badge/PiLanshare-v0.3.1--beta-green.svg?style=flat-square) ![dev-version](https://img.shields.io/badge/Dev%20PiLanshare-v0.3.2--beta-yellow.svg?style=flat-square)
 
 
 # PiLanshare
@@ -103,7 +103,7 @@ ___
 
 This project was made possible by:
 
-Raspberry Pi, Qnsmasq, iptables, Python, PHP, Bootstrap, jQuery, Bootbox, DataTables, Font Awesome, Chart.js, Quicksand Font
+[Raspberry Pi](https://www.raspberrypi.org/), [Dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html), iptables, [Python](https://www.python.org/), [PHP](https://www.php.net/), [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/), [Bootbox.js](https://bootboxjs.com/), [DataTables](https://datatables.net/), [Font Awesome](https://fontawesome.com/), [Chart.js](https://www.chartjs.org/), [Quicksand Font](https://fonts.google.com/specimen/Quicksand)
 
 ___
 
