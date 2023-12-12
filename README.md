@@ -103,7 +103,7 @@ ___
 
 This project was made possible by:
 
-[Raspberry Pi](https://www.raspberrypi.org/), [Dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html), iptables, [Python](https://www.python.org/), [PHP](https://www.php.net/), [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/), [Bootbox.js](https://bootboxjs.com/), [DataTables](https://datatables.net/), [Font Awesome](https://fontawesome.com/), [Chart.js](https://www.chartjs.org/), [Quicksand Font](https://fonts.google.com/specimen/Quicksand)
+[Raspberry Pi](https://www.raspberrypi.org/), [Dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html), [iptables](https://linux.die.net/man/8/iptables), [Python](https://www.python.org/), [PHP](https://www.php.net/), [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/), [Bootbox.js](https://bootboxjs.com/), [DataTables](https://datatables.net/), [Font Awesome](https://fontawesome.com/), [Chart.js](https://www.chartjs.org/), [Quicksand Font](https://fonts.google.com/specimen/Quicksand)
 
 ___
 
@@ -114,7 +114,7 @@ This project is under [The MIT license](https://opensource.org/licenses/MIT).
 I do although appreciate attribution.
 The libraries used on the WebUI page have their own licenses.
 
-Copyright (c) 2023 Grammatopoulos Athanasios-Vasileios
+Copyright (c) 2019-2023 Grammatopoulos Athanasios-Vasileios
 
 ___
 
